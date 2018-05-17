@@ -2,4 +2,4 @@
 
 install composer 
 
-composer require mpdf/mpdf
+--composer require mpdf/mpdf
