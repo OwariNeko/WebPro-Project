@@ -1,4 +1,5 @@
-<?php include('connect.php'); ?>
+<?php include('connect.php'); 
+require_once __DIR__ . '/vendor/autoload.php';?>
 <!DOCTYPE html>
 <html>
 			<head>
@@ -6,7 +7,13 @@
 				<title>test</title>
 				
 			</head>
-<?php>
+<?php
+	$mpdf = new \Mpdf\Mpdf();
+	$mpdf->autoScriptToLang = true;
+$mpdf->baseScript = 1;
+$mpdf->autoVietnamese = true;
+$mpdf->autoArabic = true;
+	$mpdf->autoLangToFont = true;
 	$strSQL =  "SELECT orderP.orderID, listP.listID, productName, qty,userName , orderP.location, totalPrice, bankName, bankBranch, transferProof, status, transfer.date
 				FROM orderP, listP, transfer, product, users
 				WHERE orderP.orderID = listP.orderID
@@ -20,8 +27,8 @@
 	$result = $conn->query($strSQL);
 	// $result = mysql_query($strSQL);
 	$total = $result->num_rows;
-	$txt = "ค้นหาพบทั้งสิ้น ".$total." รายการ<br><br>";
-		 echo $txt ;
+	 
+		  $mpdf->WriteHTML("ค้นหาพบทั้งสิ้น ".$total." รายการ<br><br>") ;
 		 $orderID='';
          while($row = $result->fetch_assoc()){
 			 $count += 1;
@@ -29,19 +36,19 @@
 			 if($orderID=='' or $orderID <> $row['orderID']){
 				$orderID = $row['orderID'];
 				if($count == '1'){
-					echo "<ol>".$orderID ;
+					$mpdf->WriteHTML( "<ol>".$orderID) ;
 				}
 				else{
-					echo "</ol><ol>".$orderID ;
+					$mpdf->WriteHTML("</ol><ol>".$orderID) ;
 				}
 			 }
 			
 			 
-             echo '<li>'.$row['listID'].'</li>';
+             $mpdf->WriteHTML('<li>'.$row['listID'].'</li>');
 			
 		 }
 	
-
+	$mpdf->Output();
 
 
 
