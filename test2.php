@@ -17,13 +17,13 @@
 				"; 
 	
 	
-	
-	$result = mysql_query($strSQL);
-	$total = mysql_num_rows($result);
+	$result = $conn->query($strSQL);
+	// $result = mysql_query($strSQL);
+	$total = $result->num_rows;
 	$txt = "ค้นหาพบทั้งสิ้น ".$total." รายการ<br><br>";
 		 echo $txt ;
 		 $orderID='';
-         while($row = mysql_fetch_array($result)){
+         while($row = $result->fetch_assoc()){
 			 $count += 1;
 			 
 			 if($orderID=='' or $orderID <> $row['orderID']){
