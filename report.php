@@ -39,7 +39,7 @@ require_once __DIR__ . '/vendor/autoload.php';?>
 			 if($orderID=='' or $orderID <> $row['orderID']){
 				 
 				$orderID=$row['orderID'];
-				$strSQL2 ="SELECT listID,productName,productprice
+				$strSQL2 ="SELECT listID,productName,productprice,qty
 							FROM listP,product
 							WHERE product.productID = listP.productID
 							AND orderID=('".$orderID."')";
@@ -51,7 +51,8 @@ require_once __DIR__ . '/vendor/autoload.php';?>
 			 {
 			 		$productName =$row2['productName'];
 			 		$productprice=$row2['productprice'];
-					$mpdf->WriteHTML('<li>'.$row2['listID']."	ชื่อสินค้า".$productName."							ราคา	".$productprice.'	บาท</li>');  
+					$qty =$row2['qty'];
+					$mpdf->WriteHTML('<li>'.$row2['listID']."	ชื่อสินค้า".$productName."	จำนวน	".$qty."	ชิ้น	ราคา	".$productprice.'	บาท</li>');  
 			}
 			$mpdf->WriteHTML("	ราคารวม	".$totalPrice."	บาท") ;
 			$mpdf->WriteHTML("--------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -65,7 +66,8 @@ require_once __DIR__ . '/vendor/autoload.php';?>
 			 {
 			 		$productName =$row2['productName'];
 			 		$productprice=$row2['productprice'];
-					$mpdf->WriteHTML('<li>'.$row2['listID']."	ชื่อสินค้า".$productName."							ราคา	".$productprice.'	บาท</li>');  
+					$qty =$row2['qty'];
+					$mpdf->WriteHTML('<li>'.$row2['listID']."	ชื่อสินค้า".$productName."	จำนวน	".$qty."	ชิ้น	ราคา	".$productprice.'	บาท</li>');  
 			}
 			$mpdf->WriteHTML("	ราคารวม	".$totalPrice."	บาท") ;
 			$mpdf->WriteHTML("--------------------------------------------------------------------------------------------------------------------------------------------------------");
