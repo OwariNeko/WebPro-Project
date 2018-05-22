@@ -21,7 +21,7 @@
 				if($m_count<=9){
 					$strSQL =  "SELECT cash
 					FROM transfer
-					WHERE date LIKE '2016-0".$m_count."-%'  
+					WHERE date LIKE '".$y_count."-0".$m_count."-%'  
 				 	"; 
 		
 					$result = $conn->query($strSQL);
@@ -35,7 +35,7 @@
 		{
 			$strSQL =  "SELECT cash
 					FROM transfer
-					WHERE date LIKE '2016-".$m_count."-%'  
+					WHERE date LIKE '".$y_count."-".$m_count."-%'  
 				 	"; 
 		
 					$result = $conn->query($strSQL);
